@@ -8,7 +8,6 @@ public:
         int c=0,l=0,r=0;
         while(l<=m-1 && r<=n-1){
             if(s[l]>=g[r]){
-                cout<<l<<" "<<r<<endl;
                 l++;
                 r++;
                 c++;
