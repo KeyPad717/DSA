@@ -12,11 +12,14 @@
 class Solution {
 public:
     vector<int> v;
-    vector<int> postorderTraversal(TreeNode* root) {
-        if(root==nullptr)  return v; 
-        postorderTraversal(root->left);
-        postorderTraversal(root->right);
+    void solver(TreeNode* root){
+        if(root==nullptr)   return;
+        solver(root->left);
+        solver(root->right);
         v.push_back(root->val);
+    }
+    vector<int> postorderTraversal(TreeNode* root) {
+        solver(root);
         return v;
     }
 };
