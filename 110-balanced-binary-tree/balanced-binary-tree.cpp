@@ -12,7 +12,6 @@
 class Solution {
 public:
     int solver(TreeNode* root){
-        //if(root->left==nullptr && root->left==nullptr) return 0;
         int leftH=0, rightH=0;
         if(root->left)  leftH=solver(root->left);
         if(root->right) rightH=solver(root->right);
