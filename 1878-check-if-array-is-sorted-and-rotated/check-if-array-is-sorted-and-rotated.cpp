@@ -1,40 +1,24 @@
 class Solution {
 public:
     bool check(vector<int>& nums) {
-        int f=0;
         vector<int> v;
-        for(int i=0; i<nums.size()-1;i++){
-            if(nums[i]<=nums[i+1]){
-                f++;
-            }
+        int n=nums.size(),f=0,pos=0;
+        for(int i=1;i<n;i++){
+            if(nums[i]>=nums[i-1])   f++;
+            else    pos=i;
         }
-        if(f==nums.size()-1){
-            return(true);
-        }
-        for(int i=0; i<nums.size()-1;i++){
-            if(nums[i]>nums[i+1]){
-                for(int j=i+1;j<nums.size();j++){
-                    v.push_back(nums[j]);
-                    nums.erase(nums.begin()+j);
-                    j--;
-                }
-                break;
-            }
-        }
-        for(int i=0; i<nums.size();i++){
+        if(n-1==f)  return true;
+        for(int i=pos;i<n;i++){
             v.push_back(nums[i]);
-            nums.erase(nums.begin()+i);
-            i--;
+        }
+        for(int i=0;i<pos;i++){
+            v.push_back(nums[i]);
         }
         f=0;
-        for(int i=0; i<v.size()-1;i++){
-            if(v[i]<=v[i+1]){
-                f++;
-            }
+        for(int i=1;i<n;i++){
+            if(v[i]>=v[i-1])   f++;
         }
-        if(f==v.size()-1){
-            return(true);
-        }
-        return(false);
+        if(n-1==f)  return true;
+        return false;
     }
 };
