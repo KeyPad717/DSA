@@ -1,24 +1,31 @@
 class Solution {
 public:
     bool check(vector<int>& nums) {
-        vector<int> v;
         int n=nums.size(),f=0,pos=0;
         for(int i=1;i<n;i++){
             if(nums[i]>=nums[i-1])   f++;
             else    pos=i;
         }
         if(n-1==f)  return true;
-        for(int i=pos;i<n;i++){
-            v.push_back(nums[i]);
-        }
-        for(int i=0;i<pos;i++){
-            v.push_back(nums[i]);
-        }
         f=0;
-        for(int i=1;i<n;i++){
-            if(v[i]>=v[i-1])   f++;
+        int i=pos,j=-1;
+        while(i!=j){
+            if(i==pos)  j=i;
+            if(i==n-1){
+                if(nums[i]<=nums[0]){
+                    f++;
+                    i=0;
+                    continue;
+                }
+                else break;
+            }
+            if(nums[i]<=nums[i+1]){
+                f++;
+                i++;
+            }
+            else break;
         }
-        if(n-1==f)  return true;
+        if(f==n-1)  return true;
         return false;
     }
 };
