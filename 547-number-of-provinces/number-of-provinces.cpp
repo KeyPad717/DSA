@@ -1,27 +1,26 @@
 class Solution {
 public:
+    int count=0;
+    void helper(int node, vector<vector<int>>& isConnected, vector<int>& vis){
+        vis[node]=1;
+        //cout<<node<<endl;
+        
+        int n=isConnected.size();
+        for(int i=0;i<n;i++){
+            //cout<<node-1<<" "<<i+1<<" "<<isConnected[node-1][i]<<endl;
+            if(!vis[i+1] && isConnected[node-1][i]==1){
+                
+                helper(i+1, isConnected, vis);
+            }
+        }
+    }
     int findCircleNum(vector<vector<int>>& isConnected) {
-        int n = isConnected.size(), count = 0;
-        vector<int> vis(n+1,0);
-        queue<int> q;
-
-        for(int i = 1; i <= n; i++){
+        int n=isConnected.size()+1;
+        vector<int> vis(n,0);
+        for(int i=1;i<n;i++){
             if(!vis[i]){
                 count++;
-                q.push(i);
-                vis[i] = 1;
-
-                while(!q.empty()){
-                    int x = q.front();
-                    q.pop();
-
-                    for(int j = 1; j <= n; j++){
-                        if(isConnected[x-1][j-1] == 1 && !vis[j]){
-                            vis[j] = 1;
-                            q.push(j);
-                        }
-                    }
-                }
+                helper(i, isConnected, vis);
             }
         }
         return count;
