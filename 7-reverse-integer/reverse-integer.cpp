@@ -1,25 +1,27 @@
 class Solution {
 public:
-    int reverse(int x){
-        int f = 0;
-        long int n, w = 0;
-        if ( x == -2147483648 ){
-            return ( 0 );
-        }
-        if ( x < 0 ){
-            x = -x;
-            f++;
-        }
-        while ( x > 0 ){
-            n = x % 10;
-            x /= 10;
-            w = w * 10 + n;
-        }
-        if ( w <= 2147483647 && w >= -2147483648 ){
-            if ( f == 0 ){
-            return (w);
-        }
-        return ( -w );
+    int reverse(int x) {
+        if(x>=-2147483648 && x<=2147483647){
+            if(x<0){
+                if(x==-2147483648)  return 0;
+                x=0-x;
+                long long t=0;
+                while(x>0){
+                    int p=x%10;
+                    if(t*10>2147483647) return 0;
+                    t=t*10+p;
+                    x/=10;
+                }
+                return -t;
+            }
+            long long t=0;
+            while(x>0){
+                int p=x%10;
+                if(t*10>2147483647) return 0;
+                t=t*10+p;
+                x/=10;
+            }
+            return t;
         }
         return 0;
     }
