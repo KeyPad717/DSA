@@ -16,7 +16,7 @@ public:
             prev=curr;
             curr=next;
         }
-        return next;
+        return curr;
         // return solver(n,dp);
         // if(n==0)    return 0;
         // if(n==1)    return 1;
