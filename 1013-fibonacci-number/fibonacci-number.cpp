@@ -8,7 +8,6 @@ public:
     // }
     int fib(int n) {
         if(n<=1)    return n;
-        vector<int> dp(n+1,-1);
         int prev=0;
         int curr=1;
         int next;
