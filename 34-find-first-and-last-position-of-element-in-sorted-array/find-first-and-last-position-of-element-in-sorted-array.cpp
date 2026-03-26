@@ -1,21 +1,35 @@
 class Solution {
 public:
-    int findIndex(vector<int>& nums, int target, bool first) {
-        int low = 0, high = nums.size() - 1, ans = -1;
-        while (low <= high) {
-            int mid = (low + high) / 2;
-            if (nums[mid] == target) {
-                ans = mid;
-                if (first) high = mid - 1;  // search left half
-                else low = mid + 1;         // search right half
-            } 
-            else if (nums[mid] < target) low = mid + 1;
-            else high = mid - 1;
-        }
-        return ans;
-    }
-
     vector<int> searchRange(vector<int>& nums, int target) {
-        return { findIndex(nums, target, true), findIndex(nums, target, false) };
+        int low1=0, low2=0, high1=nums.size()-1, high2=nums.size()-1, idx1=-1, idx2=-1;
+        while(low1<=high1){
+            int mid=low1+(high1-low1)/2;
+            cout<<"a: "<<low1<<" "<<high1<<" "<<mid<<" "<<nums[mid]<<endl;
+            if(nums[mid]==target){
+                high1=mid-1;
+                idx1=mid;
+            }
+            else if(nums[mid]<target){
+                low1=mid+1;
+            }
+            else{
+                high1=mid-1;
+            }
+        }
+        while(low2<=high2){
+            int mid=low2+(high2-low2)/2;
+            cout<<"b: "<<low2<<" "<<high2<<" "<<mid<<endl;
+            if(nums[mid]==target){
+                low2=mid+1;
+                idx2=mid;
+            }
+            else if(nums[mid]<target){
+                low2=mid+1;
+            }
+            else{
+                high2=mid-1;
+            }
+        }
+        return {idx1,idx2};
     }
 };
