@@ -4,7 +4,7 @@ public:
         int low1=0, low2=0, high1=nums.size()-1, high2=nums.size()-1, idx1=-1, idx2=-1;
         while(low1<=high1){
             int mid=low1+(high1-low1)/2;
-            cout<<"a: "<<low1<<" "<<high1<<" "<<mid<<" "<<nums[mid]<<endl;
+            //cout<<"a: "<<low1<<" "<<high1<<" "<<mid<<" "<<nums[mid]<<endl;
             if(nums[mid]==target){
                 high1=mid-1;
                 idx1=mid;
@@ -18,7 +18,7 @@ public:
         }
         while(low2<=high2){
             int mid=low2+(high2-low2)/2;
-            cout<<"b: "<<low2<<" "<<high2<<" "<<mid<<endl;
+            //cout<<"b: "<<low2<<" "<<high2<<" "<<mid<<endl;
             if(nums[mid]==target){
                 low2=mid+1;
                 idx2=mid;
