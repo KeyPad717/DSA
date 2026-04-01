@@ -4,7 +4,7 @@ public:
         int left=0, right=nums.size()-1;
         while(left<=right){
             int mid=left+(right-left)/2;
-            cout<<left<<" "<<nums[left]<<" "<<mid<<" "<<nums[mid]<<" "<<right<<" "<<nums[right]<<endl;
+            //cout<<left<<" "<<nums[left]<<" "<<mid<<" "<<nums[mid]<<" "<<right<<" "<<nums[right]<<endl;
             if(nums[mid]==target)   return mid;
             if(nums[mid]>=nums[right]){
                 if(target>=nums[left] && target<=nums[mid]){
