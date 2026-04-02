@@ -25,7 +25,7 @@ public:
                 if(temp->left==nullptr && temp->right==nullptr){
                     v.push_back(temp->val);
                     q.pop();
-                    continue;
+                    continue; 
                 }
                 if(temp->left==nullptr){
                     q.push(temp->right);
