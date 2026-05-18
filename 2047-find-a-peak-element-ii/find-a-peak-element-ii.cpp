@@ -1,23 +1,34 @@
 class Solution {
 public:
     vector<int> findPeakGrid(vector<vector<int>>& mat) {
-        int x=0, y=0, n=mat.size(), m=mat[0].size();
-        vector<vector<int>> v = {{0,1},{0,-1},{1,0},{-1,0}};        
+        int n=mat.size(), m=mat[0].size(),x=-1,y=-1;
+        if(n==1 && m==1)    return {0,0};
+        int left=0, right=m-1;
+        //vector<vector<int>> v = {{0,1},{0,-1}};        
         while(1){
-            int maxi=mat[x][y],f=0;
-            for(int i=0;i<4;i++){
-                int row=x+v[i][0];
-                int col=y+v[i][1];
-                if(row>=0 && row<n && col>=0 && col<m){
-                    if(mat[row][col]>maxi){
-                        f++;
-                        x=row;
-                        y=col;
-                        maxi=mat[row][col];
-                    }
+            int mid=left+(right-left)/2, maxi=-1;
+            for(int i=0;i<n;i++){
+                if(mat[i][mid]>maxi){
+                    maxi=mat[i][mid];
+                    x=i;
+                    y=mid;
                 }
             }
-            if(f==0)    return{x,y};
+            if(y>=1 && y<=m-2){
+                if(mat[x][y]>mat[x][y-1] && mat[x][y]>mat[x][y+1]){
+                    return {x,y};
+                }
+                else if (mat[x][y]>mat[x][y-1]) left=mid+1;
+                else                            right=mid-1;
+            }
+            else if (y==0){
+                if(mat[x][y]>mat[x][y+1])   return {x,y};
+                else                        left=mid+1;
+            }
+            else{
+                if(mat[x][y]>mat[x][y-1])   return {x,y};
+                else                        right=mid-1;
+            }
         }
         return {x,y};
     }
