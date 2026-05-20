@@ -1,32 +1,8 @@
 class Solution {
 public:
     
-    bool canMake(vector<int>& bloomDay, int m, int k, int day) {
-        int n = bloomDay.size();
-
-        int flowers = 0;
-        int bouquets = 0;
-
-        for (int i = 0; i < n; i++) {
-
-            if (bloomDay[i] <= day) {
-                flowers++;
-            } 
-            else {
-                flowers = 0;
-            }
-
-            if (flowers == k) {
-                bouquets++;
-                flowers = 0;
-            }
-        }
-
-        return bouquets >= m;
-    }
-
     int minDays(vector<int>& bloomDay, int m, int k) {
-
+        int n=bloomDay.size();
         long long need = 1LL * m * k;
 
         if (need > bloomDay.size()) {
@@ -39,8 +15,23 @@ public:
         while (left <= right) {
 
             int mid = left + (right - left) / 2;
+            int flowers = 0;
+            int bouquets = 0;
+            for (int i = 0; i < n; i++) {
 
-            if (canMake(bloomDay, m, k, mid)) {
+                if (bloomDay[i] <= mid) {
+                    flowers++;
+                } 
+                else {
+                    flowers = 0;
+                }
+
+                if (flowers == k) {
+                    bouquets++;
+                    flowers = 0;
+                }
+            }
+            if (bouquets >= m) {
                 right = mid - 1;
             }
             else {
