@@ -7,10 +7,11 @@ public:
             int mid=left+(right-left)/2;
             long long sum=0LL;
             for(int i=0;i<n;i++){
-                if(piles[i]<mid)    sum+=1;
-                else if(piles[i]%mid==0)    sum+=piles[i]/(mid);
-                else                sum+=(piles[i])/(mid)+1;
-                //alternative better :- sum += (piles[i] + mid - 1) / mid;
+                sum += (piles[i] + mid - 1) / mid;
+                // if(piles[i]<mid)    sum+=1;
+                // else if(piles[i]%mid==0)    sum+=piles[i]/(mid);
+                // else                sum+=(piles[i])/(mid)+1;
+                //alternative better :- 
             }
             if(sum>h)  left=mid+1;
             else{
