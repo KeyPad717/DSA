@@ -1,7 +1,7 @@
 class Solution {
 public:
     int splitArray(vector<int>& nums, int k) {
-        long long sum=accumulate(nums.begin(), nums.end(), 0), n=nums.size(), maxi=*max_element(nums.begin(), nums.end());
+        long long sum=accumulate(nums.begin(), nums.end(), 0LL), n=nums.size(), maxi=*max_element(nums.begin(), nums.end());
         if(k==1)    return sum;
         if(k==n)    return maxi;
         long long left=maxi, right=sum;
