@@ -1,24 +1,34 @@
 class Solution {
 public:
-    void solve(int index, int n, vector<int>& res, vector<vector<int>>& ans,
-               vector<int>& nums) {
 
-        if (index == n) {
-            ans.push_back(res);
+    void helper(int index,
+                vector<int>& nums,
+                vector<int>& current,
+                vector<vector<int>>& result) {
+
+        // Base case:
+        // One subset formed.
+        if (index == nums.size()) {
+            result.push_back(current);
             return;
         }
+        // Include current element
+        current.push_back(nums[index]);
+        helper(index + 1, nums, current, result);
+        current.pop_back();
+        // Exclude current element
+        helper(index + 1, nums, current, result);
 
-        res.push_back(nums[index]);
-        solve(index + 1, n, res, ans, nums);
-        res.pop_back();
-        solve(index + 1, n, res, ans, nums);
+        
     }
-    vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> ans;
-        vector<int> res;
-        int n = nums.size();
-        solve(0, n, res, ans, nums);
 
-        return ans;
+    vector<vector<int>> subsets(vector<int>& nums) {
+
+        vector<vector<int>> result;
+        vector<int> current;
+
+        helper(0, nums, current, result);
+
+        return result;
     }
 };
