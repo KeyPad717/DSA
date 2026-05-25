@@ -1,29 +1,41 @@
 class Solution {
 public:
-    void helper(int idx, int n, vector<string>& v, string& s, int n1, int n2){
-        if(idx==n && n1==n2){
-            v.push_back(s);
+
+    void helper(int open,
+                int close,
+                int n,
+                string& current,
+                vector<string>& result) {
+
+        // Base case:
+        // Valid parentheses string formed.
+        if (current.size() == 2 * n) {
+            result.push_back(current);
             return;
         }
-        if(n1>=n2){
-            if(n1!=n/2){
-                s.push_back('(');
-                helper(idx+1, n, v, s, n1+1, n2);
-                s.pop_back();
-            }
-            if(n2!=n/2){
-                s.push_back(')');
-                helper(idx+1, n, v, s, n1 , n2+1);
-                s.pop_back();
-            }
+
+        // Add '(' if still available.
+        if (open < n) {
+            current.push_back('(');
+            helper(open + 1, close, n, current, result);
+            current.pop_back();
         }
-        
-        
+
+        // Add ')' only if valid.
+        if (close < open) {
+            current.push_back(')');
+            helper(open, close + 1, n, current, result);
+            current.pop_back();
+        }
     }
+
     vector<string> generateParenthesis(int n) {
-        vector<string> v;
-        string s="";
-        helper(0, 2*n, v, s, 0, 0);
-        return v;
+
+        vector<string> result;
+        string current;
+
+        helper(0, 0, n, current, result);
+
+        return result;
     }
 };
