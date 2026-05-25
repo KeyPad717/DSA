@@ -1,53 +1,26 @@
 class Solution {
 public:
-    double ans=1, sign=1, f=0;
-    double myPow(double x, int n1) {
-        long long n=n1;
-        if(n==0)    return 1;
-        if(x==1)    return 1;
-        if(n<0) {
-            sign=-1;
-            n=0-n;
+    double myPow(double x, int n) {
+        long long power = n;
+
+        // Handle negative exponent
+        if (power < 0) {
+            x = 1 / x;
+            power = -power;
         }
-        if(n==1){
-            if(sign==-1)    return 1/x;
-            return x;
-        }
-        if(n%2){
-            n--;
-            ans*=x;
-            while(n>1){
-                if(n%2){
-                    n--;
-                    ans*=x;
-                    x*=x;
-                    n/=2;
-                }
-                else{
-                    x*=x;
-                    n/=2;
-                }
+
+        double result = 1.0;
+
+        while (power > 0) {
+            // If power is odd
+            if (power % 2 == 1) {
+                result *= x;
             }
-            ans*=x;
-            if(sign==-1)    return 1/ans;
-            return ans;
+
+            x *= x;
+            power /= 2;
         }
-        
-        while(n>1){
-            cout<<n<<" "<<x<<" "<<ans<<endl;
-            if(n%2){
-                n--;
-                ans*=x;
-                x*=x;
-                n/=2;
-            }
-            else{
-                x*=x;
-                n/=2;
-            }
-        }
-        ans*=x;
-        if(sign==-1)    return 1/ans;
-        return ans;
+
+        return result;
     }
 };
