@@ -1,32 +1,37 @@
 class Solution {
 public:
 
-    bool isPalindrome(int x) {
+    bool helper(int& front, int back) {
 
-        // Negative numbers are not palindrome.
-        // Numbers ending with 0 (except 0 itself)
-        // are also not palindrome.
-        if (x < 0 || (x % 10 == 0 && x != 0)) {
+        // Base case
+        if (back == 0) {
+            return true;
+        }
+
+        // Recurse till last digit
+        if (!helper(front, back / 10)) {
             return false;
         }
 
-        int reversedHalf = 0;
-
-        // Reverse only half of number.
-        while (x > reversedHalf) {
-
-            reversedHalf =
-                reversedHalf * 10 + x % 10;
-
-            x /= 10;
+        // Compare front and back digits
+        if ((front % 10) != (back % 10)) {
+            return false;
         }
 
-        // Even digits:
-        // x == reversedHalf
-        //
-        // Odd digits:
-        // x == reversedHalf / 10
-        return (x == reversedHalf ||
-                x == reversedHalf / 10);
+        // Move front forward
+        front /= 10;
+
+        return true;
+    }
+
+    bool isPalindrome(int x) {
+
+        if (x < 0) {
+            return false;
+        }
+
+        int front = x;
+
+        return helper(front, x);
     }
 };
