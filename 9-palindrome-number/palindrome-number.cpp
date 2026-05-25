@@ -1,14 +1,32 @@
 class Solution {
 public:
-    bool isPalindrome(int p) {
-        if(p<0) return false;
-        long long x=p;
-        long long temp=x, n=0;
-        while(temp>0){
-            n=n*10+(temp%10);
-            temp/=10;
+
+    bool isPalindrome(int x) {
+
+        // Negative numbers are not palindrome.
+        // Numbers ending with 0 (except 0 itself)
+        // are also not palindrome.
+        if (x < 0 || (x % 10 == 0 && x != 0)) {
+            return false;
         }
-        cout<<n<<endl;
-        return n==x;
+
+        int reversedHalf = 0;
+
+        // Reverse only half of number.
+        while (x > reversedHalf) {
+
+            reversedHalf =
+                reversedHalf * 10 + x % 10;
+
+            x /= 10;
+        }
+
+        // Even digits:
+        // x == reversedHalf
+        //
+        // Odd digits:
+        // x == reversedHalf / 10
+        return (x == reversedHalf ||
+                x == reversedHalf / 10);
     }
 };
