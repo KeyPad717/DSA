@@ -1,9 +1,10 @@
 class Solution {
 public:
     void helper(int len, int idx, int k, int n, vector<vector<int>>& ans, vector<int>& v, vector<int>& nums){
-        if(n==0 && v.size()==k){
-            ans.push_back(v);
-            return ;
+        if(v.size() == k){
+            if(n == 0)  // Once you've already picked k numbers, there's no point exploring further.
+                ans.push_back(v);
+            return;
         }
         if(idx>=len) return ;
         if(v.size() > k)    return;
