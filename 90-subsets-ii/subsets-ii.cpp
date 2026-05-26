@@ -1,8 +1,11 @@
 class Solution {
 public:
-    void helper(vector<int>& nums, int n, int idx, vector<int>& v, set<vector<int>>& v1){
+    void helper(vector<int>& nums, int n, int idx, vector<int>& v, vector<vector<int>>& v1){
         if(idx==n){
-            v1.insert(v);
+            for(int i=0;i<v1.size();i++){
+                if(v==v1[i])    return ;
+            }
+            v1.push_back(v);
             return ;
         }
         helper(nums, n, idx+1, v, v1);
@@ -15,9 +18,8 @@ public:
         sort(nums.begin(), nums.end());
         int n=nums.size();
         vector<int> v;
-        set<vector<int>> v1;
+        vector<vector<int>> v1;
         helper(nums, n, 0, v, v1);
-        vector<vector<int>> v2(v1.begin(), v1.end());
-        return v2;
+        return v1;
     }
 };
