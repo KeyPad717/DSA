@@ -7,13 +7,14 @@ public:
         }
         if(idx>=n)  return ;
         
-        for(int i=idx;i<n;i++){
-            if(idx<i && candidates[i]==candidates[i-1]) continue;
-            if(candidates[i]<=target){
-                v.push_back(candidates[i]);
-                helper(candidates, target-candidates[i], i+1, n, v1, v);
-                v.pop_back();
-            }
+        for(int i = idx; i < n; i++) {
+            if(i > idx && candidates[i] == candidates[i-1])
+                continue;
+            if(candidates[i] > target)
+                break;
+            v.push_back(candidates[i]);
+            helper(candidates, target - candidates[i], i + 1, n, v1, v);
+            v.pop_back();
         }
     }
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
