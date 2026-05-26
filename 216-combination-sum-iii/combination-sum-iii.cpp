@@ -1,12 +1,12 @@
 class Solution {
 public:
-    void helper(int len, int idx, int k, int n, vector<vector<int>>& ans, vector<int>& v, vector<int> nums){
+    void helper(int len, int idx, int k, int n, vector<vector<int>>& ans, vector<int>& v, vector<int>& nums){
         if(n==0 && v.size()==k){
             ans.push_back(v);
             return ;
         }
         if(idx>=len) return ;
-        //cout<<idx<<" "<<nums[idx]<<" "<<n<<endl;
+        if(v.size() > k)    return;
         if( nums[idx]<=n){
             v.push_back(nums[idx]);
             helper(len, idx+1, k, n-nums[idx], ans, v, nums);
