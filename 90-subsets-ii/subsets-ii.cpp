@@ -1,25 +1,32 @@
 class Solution {
 public:
-    void helper(vector<int>& nums, int n, int idx, vector<int>& v, vector<vector<int>>& v1){
-        if(idx==n){
-            for(int i=0;i<v1.size();i++){
-                if(v==v1[i])    return ;
-            }
-            v1.push_back(v);
-            return ;
+    void helper(int idx,
+                vector<int>& nums,
+                vector<int>& curr,
+                vector<vector<int>>& ans) {
+
+        ans.push_back(curr);
+
+        for (int i = idx; i < nums.size(); i++) {
+
+            // Skip duplicates at the same recursion level
+            if (i > idx && nums[i] == nums[i - 1])
+                continue;
+
+            curr.push_back(nums[i]);
+            helper(i + 1, nums, curr, ans);
+            curr.pop_back();
         }
-        helper(nums, n, idx+1, v, v1);
-        v.push_back(nums[idx]);
-        helper(nums, n, idx+1, v, v1);
-        v.pop_back();
-        
     }
+
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         sort(nums.begin(), nums.end());
-        int n=nums.size();
-        vector<int> v;
-        vector<vector<int>> v1;
-        helper(nums, n, 0, v, v1);
-        return v1;
+
+        vector<vector<int>> ans;
+        vector<int> curr;
+
+        helper(0, nums, curr, ans);
+
+        return ans;
     }
 };
