@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void helper(vector<int>& candidates, int target, int idx, int n, vector<vector<int>>& v1, vector<int> v){
+    void helper(vector<int>& candidates, int target, int idx, int n, vector<vector<int>>& v1, vector<int>& v){
         if(target==0){
             
             v1.push_back(v);
