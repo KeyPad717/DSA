@@ -1,11 +1,14 @@
 class Solution {
 public:
     const vector<vector<int>> bound{{0,1}, {0,-1}, {1,0}, {-1,0}};
-    void check(vector<vector<char>>& board, string word, int idx, int sz, int n, int m, int sz1, int sz2, bool& ans){
-        if(ans==true || idx==sz){
-            ans=true;
-            return ;
+    void check(vector<vector<char>>& board, string& word, int idx, int sz, int n, int m, int sz1, int sz2, bool& ans){
+        if(idx == sz){
+            ans = true;
+            return;
         }
+
+        if(ans)
+            return;
         for(int i=0;i<4;i++){
             int row=n+bound[i][0];
             int col=m+bound[i][1];
