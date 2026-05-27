@@ -21,16 +21,17 @@ public:
         }
     }
     bool exist(vector<vector<char>>& board, string word) {
-        unordered_map<char,int> boardFreq;
-        unordered_map<char,int> wordFreq;
+        vector<int> boardFreq(128, 0);
+        vector<int> wordFreq(128, 0);
         int n=board.size(), m=board[0].size(), sz=word.size();
         bool ans=false;
         for(int i=0;i<n;i++)
             for(int j=0;j<m;j++)
                 boardFreq[board[i][j]]++;
-        for(int i=0;i<sz;i++)    wordFreq[word[i]]++;
-        for(auto &x : wordFreq){
-            if(boardFreq[x.first] < x.second)
+        for(char c : word)
+            wordFreq[c]++;
+        for(int i=0;i<128;i++){
+            if(boardFreq[i] < wordFreq[i])
                 return false;
         }
         for(int i=0;i<n;i++){
