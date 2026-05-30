@@ -14,7 +14,6 @@ public:
         if(!head->next){
             return nullptr;
         }
-        int x=n;
         ListNode* temp=head;
         ListNode* temp1;
         for(int i=0;i<n;i++){
@@ -22,13 +21,10 @@ public:
         }
         if(!temp)   return head->next;
         temp1=head;
-        
         while(temp->next){
             temp=temp->next;
             temp1=temp1->next;
         }
-        //cout<<temp1->val<<" "<<temp1->next->next->value<<" "<<temp->val<<endl;
-        
         temp1->next=temp1->next->next;
         return head;
     }
