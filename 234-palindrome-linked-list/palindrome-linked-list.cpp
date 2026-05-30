@@ -29,7 +29,7 @@ public:
             curr=nex;
         }
         fast=head;
-        while(prev && fast!=slow){
+        while(prev){
             if(prev->val!=fast->val)    return false;
             prev=prev->next;
             fast=fast->next;
