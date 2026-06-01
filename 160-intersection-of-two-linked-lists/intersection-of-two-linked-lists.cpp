@@ -11,7 +11,7 @@ public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         ListNode* tempA=headA;
         ListNode* tempB=headB;
-        int lenA=1, lenB=1, diff;
+        int lenA=0, lenB=0, diff;
         while(tempA){
             lenA++;
             tempA=tempA->next;
