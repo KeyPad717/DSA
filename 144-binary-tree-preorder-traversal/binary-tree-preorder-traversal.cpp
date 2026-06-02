@@ -14,15 +14,14 @@ public:
     vector<int> preorderTraversal(TreeNode* root) {
         vector<int> res;
         if(!root)   return res;
-        deque<TreeNode*> q;
-        q.push_back(root);
+        stack<TreeNode*> q;
+        q.push(root);
         while(!q.empty()){
-            TreeNode* temp=q.front();
-            q.pop_front();
+            TreeNode* temp=q.top();
+            q.pop();
             res.push_back(temp->val);
-            if(temp->right)  q.push_front(temp->right);
-            if(temp->left)  q.push_front(temp->left);
-            
+            if(temp->right)  q.push(temp->right);
+            if(temp->left)  q.push(temp->left);
         }
         return res;
     }
