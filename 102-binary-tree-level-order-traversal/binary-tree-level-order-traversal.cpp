@@ -19,7 +19,7 @@ public:
         while(!q.empty()){
             vector<int> v; 
             int n=q.size();
-            while(!q.empty() && n){
+            while(n){
                 TreeNode* temp=q.front();
                 int ele=temp->val;
                 if(temp->left)  q.push(temp->left);
