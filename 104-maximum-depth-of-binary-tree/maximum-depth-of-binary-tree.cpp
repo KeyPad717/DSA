@@ -13,10 +13,7 @@ class Solution {
 public:
     int maxHelper(TreeNode* root){
         if(!root)   return 0;
-        if(!root->left && !root->right) return 1;
-        // else if (!root->left)   return 1+maxHelper(root->right);
-        // else if (!root->right)   return 1+maxHelper(root->left);
-        return max(1+maxHelper(root->left), 1+maxHelper(root->right));
+        return 1+max(maxHelper(root->left), maxHelper(root->right));
     }
     int maxDepth(TreeNode* root) {
         return maxHelper(root);
