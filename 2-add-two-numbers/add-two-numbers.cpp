@@ -10,75 +10,62 @@
  */
 class Solution {
 public:
-    int f=0;
-    void addHelper(ListNode* l1, ListNode* l2, int carry){
-        if(!l1 && !l2){ 
-            if(carry==1)    f++;
-            return ;
-        }
-        else{
-            l2->val=l1->val+l2->val+carry;
-        }
-        if(l2->val>9){
-            l2->val=((l2->val)%10);
-            addHelper(l1->next,l2->next,1);
-        }
-        else{
-            addHelper(l1->next,l2->next,0);
-        }
-    }
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         ListNode* temp1=l1;
         ListNode* temp2=l2;
-        int a=0,b=0;
-        while(temp1->next){
-            a++;
+        int carry=0;
+        ListNode* dummy=new ListNode(-1);
+        ListNode* head=dummy;
+        while(temp1 && temp2){
+            int x=carry+temp1->val+temp2->val;
+            ListNode* newNode=new ListNode();
+            if(x>9) {
+                newNode->val=x%10;
+                carry=1;
+            }
+            else{
+                newNode->val=x;
+                carry=0;
+            }
+            dummy->next=newNode;
+            dummy=dummy->next;
             temp1=temp1->next;
-        }
-        while(temp2->next){
-            b++;
             temp2=temp2->next;
         }
-        a++;
-        b++;
-        if(a>b){
-            int diff=a-b;
-            while(diff){
-                ListNode* newNode=new ListNode(0);
-                temp2->next=newNode;
-                temp2=temp2->next;
-                diff--;
+        while(temp1){
+            int x=carry+temp1->val;
+            ListNode* newNode=new ListNode();
+            if(x>9) {
+                newNode->val=x%10;
+                carry=1;
             }
-        } 
-        else{
-            int diff=b-a;
-            while(diff){
-                ListNode* newNode=new ListNode(0);
-                temp1->next=newNode;
-                temp1=temp1->next;
-                diff--;
+            else{
+                newNode->val=x;
+                carry=0;
             }
-        }    
-        // temp1=l1;
-        // temp2=l2;
-        // while(temp1){
-        //     cout<<temp1->val<<" ";
-        //     temp1=temp1->next;
-        // }
-        // cout<<endl;
-        // while(temp2){
-        //     cout<<temp2->val<<" ";
-        //     temp2=temp2->next;
-        // }
-        addHelper (l1,l2,0);
-        if(f>0){
-            temp1=l2;
-            while(temp1->next){
-                temp1=temp1->next;
-            }
-            ListNode* newNode1=new ListNode(1);
-            temp1->next=newNode1;
+            dummy->next=newNode;
+            dummy=dummy->next;
+            temp1=temp1->next;
         }
-        return l2;
+        while(temp2){
+            int x=carry+temp2->val;
+            ListNode* newNode=new ListNode();
+            if(x>9) {
+                newNode->val=x%10;
+                carry=1;
+            }
+            else{
+                newNode->val=x;
+                carry=0;
+            }
+            dummy->next=newNode;
+            dummy=dummy->next;
+            temp2=temp2->next;
+        }
+        if(carry==1){
+            ListNode* newNode=new ListNode(1);
+            dummy->next=newNode;
+        }
+        return head->next;
     }
 };
