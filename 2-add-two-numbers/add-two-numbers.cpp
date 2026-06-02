@@ -16,12 +16,6 @@ public:
             if(carry==1)    f++;
             return ;
         }
-        if(!l1){
-            l2->val=l2->val+carry;
-        }
-        else if(!l2){
-            l2->val=l1->val+carry;
-        }
         else{
             l2->val=l1->val+l2->val+carry;
         }
