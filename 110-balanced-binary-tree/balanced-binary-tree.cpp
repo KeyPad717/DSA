@@ -20,8 +20,6 @@ public:
         return max(lh,rh)+1;
     }
     bool isBalanced(TreeNode* root) {
-        int x=balHelper(root);
-        if(x==-1)   return false;
-        return true;
+        return balHelper(root) != -1;
     }
 };
