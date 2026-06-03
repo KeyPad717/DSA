@@ -11,13 +11,13 @@
  */
 class Solution {
 public:
-    bool inorderTraversal(TreeNode* root1,TreeNode* root2) {
-        if(root1 == nullptr && root2==nullptr) return true;
-        if(root1 == nullptr || root2==nullptr) return false;
-        if(root1->val != root2->val)    return false;
-        return(inorderTraversal(root1->left,root2->left) && inorderTraversal(root1->right,root2->right));
+    bool helper(TreeNode* p, TreeNode* q){
+        if(!p && !q)    return true;
+        if(!p || !q)    return false;
+        if(p->val!=q->val)      return false;
+        return helper(p->left,q->left) && helper(p->right,q->right);
     }
     bool isSameTree(TreeNode* p, TreeNode* q) {
-        return(inorderTraversal(p,q));
+        return helper(p,q);
     }
 };
