@@ -17,7 +17,7 @@ public:
         return symHelper(left->left,right->right) && symHelper(left->right,right->left);
     }
     bool isSymmetric(TreeNode* root) {
-        if(!root->left && !root->right) return true;
+        if(!root) return true;
         return symHelper(root->left, root->right);
     }
 };
