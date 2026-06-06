@@ -5,10 +5,7 @@ public:
         vector<vector<int>> res;
         res.push_back(intervals[0]);
         for(int i=1;i<intervals.size();i++){
-            if(intervals[i][0]==res[res.size()-1][1]){
-                res[res.size()-1][1]=intervals[i][1];
-            }
-            else if(intervals[i][0]<res[res.size()-1][1]){
+            if(intervals[i][0]<=res[res.size()-1][1]){
                 res[res.size()-1][1]=max(intervals[i][1], res[res.size()-1][1]);
             }
             else{
