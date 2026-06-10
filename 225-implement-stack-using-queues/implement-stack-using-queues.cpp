@@ -11,19 +11,13 @@ public:
     
     int pop() {
         int z=dq.back();
-        vector<int> v;
-        int n=dq.size(), sz=dq.size();
-        while(!empty() && n>0){
-            int y=dq.front();
-            v.push_back(y);
-            n--;
-            dq.pop();
-        }
-        //for(int i=0;i<v.size();i++) cout<<v[i]<<endl;
-        dq=queue<int>();
+        int sz=dq.size();
         for(int i=0;i<sz-1;i++){
-            dq.push(v[i]);
+            int temp=dq.front();
+            dq.pop();
+            dq.push(temp);
         }
+        dq.pop();
         return z;
     }
     
