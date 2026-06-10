@@ -13,7 +13,7 @@ public:
         int z=dq.back();
         vector<int> v;
         int n=dq.size(), sz=dq.size();
-        while(!empty() && n>=0){
+        while(!empty() && n>0){
             int y=dq.front();
             v.push_back(y);
             n--;
