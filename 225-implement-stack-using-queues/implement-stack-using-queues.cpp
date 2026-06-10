@@ -1,18 +1,30 @@
 class MyStack {
 public:
-    deque<int> dq;
+    queue<int> dq;
     MyStack() {
         
     }
     
     void push(int x) {
-        dq.push_back(x);
+        dq.push(x);
     }
     
     int pop() {
-        int x=dq.back();
-        dq.pop_back();
-        return x;
+        int z=dq.back();
+        vector<int> v;
+        int n=dq.size(), sz=dq.size();
+        while(!empty() && n>=0){
+            int y=dq.front();
+            v.push_back(y);
+            n--;
+            dq.pop();
+        }
+        //for(int i=0;i<v.size();i++) cout<<v[i]<<endl;
+        dq=queue<int>();
+        for(int i=0;i<sz-1;i++){
+            dq.push(v[i]);
+        }
+        return z;
     }
     
     int top() {
