@@ -2,53 +2,26 @@ class Solution {
 public:
     vector<int> nextGreaterElements(vector<int>& nums) {
         int n=nums.size();
-        map<pair<int,int>, int> mp;
         stack<int> st;
         vector<int> res(n);
-        for(int i=n-1;i>=0;i--){
+        for(int i=2*n-1;i>=0;i--){
+            int idx=i%n;
+            //cout<<idx<<endl;
             if(st.empty()){
-                st.push(nums[i]);
-                mp[{nums[i],i}]=-1;
+                st.push(nums[idx]);
+                res[idx]=-1;
             }
             else{
-                while(!st.empty() && st.top()<nums[i])  st.pop();
+                while(!st.empty() && st.top()<=nums[idx])  st.pop();
                 if(st.empty()){
-                    st.push(nums[i]);
-                    mp[{nums[i],i}]=-1;
+                    st.push(nums[idx]);
+                    res[idx]=-1;
                 }
                 else{
-                    mp[{nums[i],i}]=st.top();
-                    st.push(nums[i]);
+                    res[idx]=st.top();
+                    st.push(nums[idx]);
                 }
             }
-        }
-        // while(!st.empty()){
-        //     cout<<st.top()<<endl;
-        //     st.pop();
-        // }
-        for(int i=n-1;i>=0;i--){
-            //if(!st.empty()) cout<<i<<" "<<nums[i]<<" "<<st.top()<<" "<<mp[nums[i]]<<endl;
-            if(st.empty()){
-                st.push(nums[i]);
-                mp[{nums[i],i}]=-1;
-            }
-            else{
-                while(!st.empty() && st.top()<=nums[i])  st.pop();
-                if(st.empty()){
-                    st.push(nums[i]);
-                    mp[{nums[i],i}]=-1;
-                }
-                else{
-                    //cout<<nums[i]<<" "<<mp[{nums[i],i}]<<endl;
-                    mp[{nums[i],i}]=st.top();
-                    st.push(nums[i]);
-                    //cout<<nums[i]<<" "<<mp[{nums[i],i}]<<endl;
-                }
-            }
-            //if(!st.empty()) cout<<i<<" "<<nums[i]<<" "<<st.top()<<" "<<mp[{nums[i],i}]<<endl;
-        }
-        for(int i=0;i<n;i++){
-            res[i]=mp[{nums[i],i}];
         }
         return res;
     }
