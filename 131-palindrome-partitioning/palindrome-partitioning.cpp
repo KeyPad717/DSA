@@ -1,10 +1,11 @@
 class Solution {
 public:
     bool isPal(string s){
-        //if(s=="")   return false;
-        string y=s;
-        reverse(y.begin(),y.end());
-        return y==s;
+        int l=0, r=s.size()-1;
+        while(l<=r){
+            if(s[l++]!=s[r--])  return false;
+        }
+        return true;
     }
     void helper(int idx, string s, vector<vector<string>>& res, vector<string>& res1){
         if(idx==s.size()){
@@ -12,9 +13,8 @@ public:
             return ;
         }
         for(int i=idx;i<s.size();i++){
-            string temp=s.substr(idx,i-idx+1);
-            if(isPal(temp)){
-                res1.push_back(temp);
+            if(isPal(s.substr(idx,i-idx+1))){
+                res1.push_back(s.substr(idx,i-idx+1));
                 helper(i+1,s,res,res1);
                 res1.pop_back();
             }
