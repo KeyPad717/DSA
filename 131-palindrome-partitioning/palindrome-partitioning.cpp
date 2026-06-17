@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool isPal(string s){
-        if(s=="")   return false;
+        //if(s=="")   return false;
         string y=s;
         reverse(y.begin(),y.end());
         return y==s;
