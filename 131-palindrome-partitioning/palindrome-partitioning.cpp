@@ -1,7 +1,6 @@
 class Solution {
 public:
-    bool isPal(string s){
-        int l=0, r=s.size()-1;
+    bool isPal(int l, int r,const string& s){
         while(l<=r){
             if(s[l++]!=s[r--])  return false;
         }
@@ -13,7 +12,7 @@ public:
             return ;
         }
         for(int i=idx;i<s.size();i++){
-            if(isPal(s.substr(idx,i-idx+1))){
+            if(isPal(idx, i, s)){
                 res1.push_back(s.substr(idx,i-idx+1));
                 helper(i+1,s,res,res1);
                 res1.pop_back();
