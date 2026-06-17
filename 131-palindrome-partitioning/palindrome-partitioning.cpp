@@ -6,7 +6,7 @@ public:
         }
         return true;
     }
-    void helper(int idx, string s, vector<vector<string>>& res, vector<string>& res1){
+    void helper(int idx, const string& s, vector<vector<string>>& res, vector<string>& res1){
         if(idx==s.size()){
             res.push_back(res1);
             return ;
