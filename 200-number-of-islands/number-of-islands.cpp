@@ -3,11 +3,11 @@ public:
     const int dr[4]={-1,1,0,0};
     const int dc[4]={0,0,-1,1};
     void dfs(int m, int n, int x, int y, vector<vector<char>>& grid){
+        grid[x][y]='0';
         for(int i=0;i<4;i++){
             int c1=x+dr[i];
             int c2=y+dc[i];
             if(c1>=0 && c1<m && c2>=0 && c2<n && grid[c1][c2]=='1'){
-                grid[c1][c2]='0';
                 dfs(m,n,c1,c2,grid);
             }
         }
