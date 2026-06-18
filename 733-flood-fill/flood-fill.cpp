@@ -2,7 +2,7 @@ class Solution {
 public:
     const int dr[4]={0,0,-1,1};
     const int dc[4]={1,-1,0,0};
-    void dfs(const int m, const int n, int sr, int sc, vector<vector<int>>& image, int color, const int fixed){
+    void dfs(int m, int n, int sr, int sc, vector<vector<int>>& image, int color, const int fixed){
         image[sr][sc]=color;
         for(int i=0;i<4;i++){
             int x=sr+dr[i];
