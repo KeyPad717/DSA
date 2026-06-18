@@ -1,28 +1,21 @@
 class Solution {
 public:
-    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
-        int m=image.size();
-        int n=image[0].size();
-        int tar=image[sr][sc];
-        if(tar==color)  return image;
-        queue<pair<int,int>> q;
-        q.push({sr,sc});
-        int adj[4][2]={{0,1},{0,-1},{1,0},{-1,0}};
-        while(!q.empty()){
-            int a=q.front().first;
-            int b=q.front().second;
-            //cout<<a<<" "<<b<<endl;
-            q.pop();
-            image[a][b]=color;
-            for(int i=0;i<4;i++){
-                int x=a+adj[i][0];
-                int y=b+adj[i][1];
-                if(x>=0 && y>=0 && x<m && y<n && image[x][y]==tar){
-                    image[x][y]=color;
-                    q.push({x,y});
-                }
+    const int dr[4]={0,0,-1,1};
+    const int dc[4]={1,-1,0,0};
+    void dfs(const int m, const int n, int sr, int sc, vector<vector<int>>& image, int color, const int fixed){
+        image[sr][sc]=color;
+        for(int i=0;i<4;i++){
+            int x=sr+dr[i];
+            int y=sc+dc[i];
+            if(x>=0 && x<m && y>=0 && y<n && image[x][y]==fixed){
+                dfs(m, n, x, y, image, color, fixed);
             }
         }
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        int fixed=image[sr][sc];
+        if(image[sr][sc]!=color)
+            dfs(image.size(), image[0].size(), sr, sc, image, color, fixed);
         return image;
     }
 };
