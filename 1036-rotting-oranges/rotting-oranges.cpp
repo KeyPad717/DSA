@@ -4,7 +4,7 @@ public:
     const int dc[4]={-1,1,0,0};
     int orangesRotting(vector<vector<int>>& grid) {
         int m=grid.size(), n=grid[0].size();
-        int maxtime=0, count;
+        int maxtime=0, count=0;
         queue<pair<pair<int,int>, int>> q;
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
@@ -14,7 +14,7 @@ public:
                 if(grid[i][j]==1)   count++;
             }
         }
-        if(count==0)    return -1;
+        if(count==0)    return 0;
         while(!q.empty()){
             int c1=q.front().first.first;
             int c2=q.front().first.second;
@@ -25,16 +25,13 @@ public:
                 int y=c2+dc[i];
                 if(x>=0 && x<m && y>=0 && y<n && grid[x][y]==1){
                     grid[x][y]=2;
+                    count--;
                     q.push({{x,y},time+1});
                 }
             }
             maxtime=max(maxtime,time);
         }
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(grid[i][j]==1)   return -1;
-            }
-        }
+        if(count>0) return -1;
         return maxtime;
     }
 };
