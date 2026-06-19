@@ -6,32 +6,27 @@ public:
         for(int i=0;i<asteroids.size();i++){
             if(st.empty())  st.push(asteroids[i]);
             else{
-                int f=0;
+                bool alive=true;
                 while(!st.empty()){
-                    if((asteroids[i]>0 && st.top()>0) || (asteroids[i]<0 && st.top()<0) || (asteroids[i]>0 && st.top()<0)
-                        || (st.top()==asteroids[i])){
-                        f++;
-                        st.push(asteroids[i]);
-                        break;
-                    }
-                    else{
+                    if((asteroids[i]<0 && st.top()>0)){
                         if(abs(asteroids[i])==st.top()){
                             st.pop();
-                            f++;
+                            alive=false;
                             break;
                         }
                         else if(abs(asteroids[i])<st.top()){
-                            //cout<<"a: "<<asteroids[i]<<" "<<st.top()<<endl;
-                            f++;
                             break;
                         }
                         else{
-                            //cout<<"b: "<<asteroids[i]<<" "<<st.top()<<endl;
                             st.pop();
                         }
                     }
+                    else{
+                        st.push(asteroids[i]);
+                        break;
+                    }
                 }
-                if(f==0 && st.empty())  st.push(asteroids[i]);
+                if(alive && st.empty())  st.push(asteroids[i]);
             }
         }
         while(!st.empty()){
