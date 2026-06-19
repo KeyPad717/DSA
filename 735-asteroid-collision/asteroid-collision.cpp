@@ -6,12 +6,12 @@ public:
         for(int i=0;i<asteroids.size();i++){
             if(st.empty())  st.push(asteroids[i]);
             else{
-                bool alive=true;
+                int f=0;
                 while(!st.empty()){
                     if((asteroids[i]<0 && st.top()>0)){
                         if(abs(asteroids[i])==st.top()){
                             st.pop();
-                            alive=false;
+                            f++;
                             break;
                         }
                         else if(abs(asteroids[i])<st.top()){
@@ -26,7 +26,7 @@ public:
                         break;
                     }
                 }
-                if(alive && st.empty())  st.push(asteroids[i]);
+                if(f==0 && st.empty())  st.push(asteroids[i]);
             }
         }
         while(!st.empty()){
