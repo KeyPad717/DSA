@@ -19,7 +19,6 @@ public:
             int c1=q.front().first.first;
             int c2=q.front().first.second;
             q.pop();
-            //cout<<c1<<" "<<c2<<" "<<step<<endl;
             for(int i=0;i<4;i++){
                 int x=c1+dr[i];
                 int y=c2+dc[i];
