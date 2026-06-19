@@ -4,29 +4,13 @@ public:
         vector<int> res;
         stack<int> st;
         for(int i=0;i<asteroids.size();i++){
-            if(st.empty())  st.push(asteroids[i]);
+            if(asteroids[i]>0)  st.push(asteroids[i]);
             else{
-                int f=0;
-                while(!st.empty()){
-                    if((asteroids[i]<0 && st.top()>0)){
-                        if(abs(asteroids[i])==st.top()){
-                            st.pop();
-                            f++;
-                            break;
-                        }
-                        else if(abs(asteroids[i])<st.top()){
-                            break;
-                        }
-                        else{
-                            st.pop();
-                        }
-                    }
-                    else{
-                        st.push(asteroids[i]);
-                        break;
-                    }
+                while(!st.empty() && st.top()>0 && st.top()<abs(asteroids[i])){
+                    st.pop();
                 }
-                if(f==0 && st.empty())  st.push(asteroids[i]);
+                if(!st.empty() && st.top()==abs(asteroids[i]))   st.pop();
+                else if(st.empty() || st.top()<0)           st.push(asteroids[i]);
             }
         }
         while(!st.empty()){
