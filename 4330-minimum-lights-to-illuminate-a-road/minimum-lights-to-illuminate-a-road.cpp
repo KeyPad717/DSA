@@ -24,10 +24,7 @@ public:
                 len=0;
             }
         }
-        if(len>0){
-            if(len%3==0) cnt+=len/3;
-            else       cnt+=(len/3)+1;
-        }
+        cnt+=(len+2)/3;
         return cnt;
     }
 };
