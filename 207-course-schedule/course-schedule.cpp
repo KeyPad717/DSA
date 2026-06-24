@@ -2,7 +2,7 @@ class Solution {
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         vector<vector<int>> adj(numCourses);
-        vector<int> vis(numCourses,0), indegree(numCourses,0), res;
+        vector<int> indegree(numCourses,0), res;
         queue<int> q;
         for(auto x:prerequisites){
             adj[x[1]].push_back(x[0]);  
