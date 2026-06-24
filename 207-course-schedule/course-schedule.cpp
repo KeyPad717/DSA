@@ -1,8 +1,9 @@
 class Solution {
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        int count=0;
         vector<vector<int>> adj(numCourses);
-        vector<int> indegree(numCourses,0), res;
+        vector<int> indegree(numCourses,0);
         queue<int> q;
         for(auto x:prerequisites){
             adj[x[1]].push_back(x[0]);  
@@ -13,14 +14,14 @@ public:
         }
         while(!q.empty()){
             int node=q.front();
-            res.push_back(node);
+            count++;
             q.pop();
             for(int x:adj[node]){
                 indegree[x]--;
                 if(indegree[x]==0)  q.push(x);
             }
         }
-        if(res.size()==numCourses)  return true;
+        if(count==numCourses)  return true;
         return false;
     }
 };
