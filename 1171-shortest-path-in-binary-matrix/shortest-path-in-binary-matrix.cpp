@@ -3,7 +3,7 @@ public:
     const int dr[8]={0,0,1,-1,1,-1,1,-1};
     const int dc[8]={1,-1,0,0,1,-1,-1,1};
     int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
-        int n=grid.size(), mini=INT_MAX;
+        int n=grid.size();
         if(grid[0][0]==1)   return -1;
         queue<pair<int,pair<int,int>>> q;
         q.push({0,{0,0}});
@@ -14,8 +14,7 @@ public:
             q.pop();
             grid[x][y]=1;
             if(x==n-1 && y==n-1){
-                mini=min(mini,dist+1);
-                continue;
+                return dist+1;
             }
             for(int i=0;i<8;i++){
                 int c1=dr[i]+x;
@@ -26,7 +25,6 @@ public:
                 }
             }
         }
-        if(mini==INT_MAX)   return -1;
-        return mini;
+        return -1;
     }
 };
