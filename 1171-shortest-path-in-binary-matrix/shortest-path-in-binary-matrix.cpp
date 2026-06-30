@@ -8,11 +8,11 @@ public:
         queue<pair<int,int>> q;
         vector<vector<int>> dist(n, vector<int> (n,0));
         q.push({0,0});
+        grid[0][0]=1;
         while(!q.empty()){
             int x=q.front().first;
             int y=q.front().second;
             q.pop();
-            grid[x][y]=1;
             if(x==n-1 && y==n-1){
                 return dist[x][y]+1;
             }
