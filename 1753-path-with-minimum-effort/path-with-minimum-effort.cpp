@@ -17,7 +17,7 @@ public:
             if(x==r-1 && y==c-1){
                 return d;
             }
-            if(d!=dist[x][y])   continue;
+            //if(d!=dist[x][y])   continue;
             for(int i=0;i<4;i++){
                 int c1=dr[i]+x;
                 int c2=dc[i]+y;
