@@ -5,7 +5,7 @@ public:
         if(nums.size()==1)    return 1;
         while(j<nums.size()){
             while(j<nums.size() && nums[i]==nums[j]) j++;
-            if(j>=nums.size())  continue;
+            if(j>=nums.size())  break;
             i++;
             nums[i]=nums[j];
         }
