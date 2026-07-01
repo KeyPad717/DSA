@@ -3,7 +3,7 @@ public:
     int dr[4]={0,0,1,-1};
     int dc[4]={-1,1,0,0};
     int minimumEffortPath(vector<vector<int>>& heights) {
-        int r=heights.size(), c=heights[0].size(), eff=INT_MAX, maxi=INT_MIN;
+        int r=heights.size(), c=heights[0].size(), maxi=INT_MIN;
         priority_queue<pair<int,pair<int,int>>, vector<pair<int,pair<int,int>>>, 
                         greater<pair<int,pair<int,int>>>> q;
         vector<vector<int>> dist(r, vector<int> (c,INT_MAX));
@@ -15,8 +15,7 @@ public:
             int y=q.top().second.second;
             q.pop();
             if(x==r-1 && y==c-1){
-                eff=min(eff,d);
-                continue;
+                return d;
             }
             if(d!=dist[x][y])   continue;
             for(int i=0;i<4;i++){
@@ -31,6 +30,6 @@ public:
                 }
             }
         }
-        return eff;
+        return -1;
     }
 };
