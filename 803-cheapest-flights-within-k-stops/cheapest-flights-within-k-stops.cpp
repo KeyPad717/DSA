@@ -16,7 +16,7 @@ public:
             int dist1=it.second.second;
             q.pop();
             if(stops>k){
-                break;
+                continue;
             }
             for(auto x:adj[node]){
                 int node1=x.first;
