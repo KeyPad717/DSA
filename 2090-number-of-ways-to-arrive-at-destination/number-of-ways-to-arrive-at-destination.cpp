@@ -26,10 +26,7 @@ public:
                     ways[node1]=ways[node];
                 }
                 else if(edge+dist[node]==dist[node1]){
-                    long long a=ways[node1]%1000000007;
-                    long long b=ways[node]%1000000007;
-                    ways[node1]=a+b;
-                    ways[node1]=ways[node1]%1000000007;
+                    ways[node1] = (ways[node1] + ways[node]) % 1000000007;
                 }
             }
         }
