@@ -9,10 +9,7 @@ public:
         }
         for(int x:st){
             len=1;
-            if(st.find(x-1)!=st.end()){
-                continue;
-            }
-            else{
+            if(st.find(x-1)==st.end()){
                 while(1){
                     x++;
                     if(st.find(x)!=st.end()){
