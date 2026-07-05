@@ -20,7 +20,6 @@ public:
                     }
                     else{
                         len=1;
-                        maxi=max(len,maxi);
                         break;
                     }
                     maxi=max(len,maxi);
