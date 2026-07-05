@@ -4,8 +4,6 @@ public:
         if(nums.empty())    return 0;
         sort(nums.begin(), nums.end());
         int len=1, maxi=INT_MIN;
-        for(int x:nums) cout<<x<<" ";
-        cout<<endl;
         for(int i=0;i<nums.size()-1;i++){
             if(nums[i]==nums[i+1])  continue;
             if(nums[i]+1==nums[i+1]){
