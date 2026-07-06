@@ -5,7 +5,7 @@ public:
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(matrix[i][j]==0){
-                    cout<<i<<" "<<j<<" "<<matrix[i][j]<<endl;
+                    //cout<<i<<" "<<j<<" "<<matrix[i][j]<<endl;
                     if(i==0 && j==0){
                         col=0;
                         matrix[i][j]=0;
