@@ -24,14 +24,10 @@ public:
         cnt2=0;
         for(int i=0;i<n;i++){
             if(nums[i]==el1)    cnt1++;
-            if(nums[i]==el2)    cnt2++;
+            else if(nums[i]==el2)    cnt2++;
         }
-        if(el1==el2){
-            res.push_back(el1);
-            return res;
-        }
-        if(cnt1>ceil(n/3))  res.push_back(el1);
-        if(cnt2>ceil(n/3))  res.push_back(el2);
+        if(cnt1>(n/3))  res.push_back(el1);
+        if(cnt2>(n/3))  res.push_back(el2);
         return res;
     }
 };
