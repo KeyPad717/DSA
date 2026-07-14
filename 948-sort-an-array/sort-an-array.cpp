@@ -1,36 +1,45 @@
 class Solution {
 public:
-    void merge(vector<int>& nums, int low, int mid, int high, vector<int>& temp){
-        int left=low, right=mid+1, k=low;
-        while(left<=mid && right<=high){
-            if(nums[left]<=nums[right]){
-                temp[k++]=nums[left++];
+    void mergeSort(int left, int mid , int right, vector<int>& nums, vector<int>& sorted){
+        int eleP=left;
+        int a=left, b=mid+1;
+        while(eleP<=right && a<=mid && b<=right){
+            if(nums[a]<=nums[b]){
+                sorted[eleP]=nums[a];
+                a++;
+                eleP++;
             }
             else{
-                temp[k++]=nums[right++];
+                sorted[eleP]=nums[b];
+                b++; 
+                eleP++;
             }
         }
-        while(left<=mid){
-            temp[k++]=nums[left++];
+        while(eleP<=right && a<=mid){
+            sorted[eleP]=nums[a];
+            eleP++;
+            a++;
         }
-        while(right<=high){
-            temp[k++]=nums[right++];
+        while(eleP<=right && b<=right){
+            sorted[eleP]=nums[b];
+            eleP++;
+            b++; 
         }
-        for(int i=low;i<=high;i++){
-            nums[i]=temp[i];
+        for(int i=left;i<=right;i++){
+            nums[i]=sorted[i];
         }
     }
-    void mergeSort(vector<int>& nums, int low, int high, vector<int>& temp){
-        if(low>=high)   return;
-        int mid=low+(high-low)/2;
-        mergeSort(nums, low, mid, temp);
-        mergeSort(nums, mid+1, high, temp);
-        merge(nums, low, mid, high, temp);
+    void merge(int left, int right, vector<int>& nums, vector<int>& sorted){
+        if(left>=right) return;
+        int mid=left+(right-left)/2;
+        merge(left,mid,nums, sorted);
+        merge(mid+1, right, nums, sorted);
+        mergeSort(left, mid, right, nums, sorted);
     }
     vector<int> sortArray(vector<int>& nums) {
-        if(nums.empty())    return nums;
-        vector<int> temp(nums.size());
-        mergeSort(nums, 0, nums.size()-1, temp);
+        int n=nums.size();
+        vector<int> sorted(nums.size());
+        merge(0,n-1,nums, sorted);
         return nums;
     }
 };
