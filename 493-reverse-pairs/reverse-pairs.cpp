@@ -9,7 +9,7 @@ public:
         for(int i=a;i<=mid;i++){
             long long x=1LL * nums[i];
             long long y=1LL;
-            while(c<=right && x>(2*y*nums[c]))    c++;
+            while(c<=right && (1LL * nums[i])>(2LL * nums[c]))    c++;
             cnt+=c-(mid+1);
         }
         while(a<=mid && b<=right){
