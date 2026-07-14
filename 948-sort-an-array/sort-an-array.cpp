@@ -1,45 +1,46 @@
 class Solution {
 public:
-    void mergeSort(int left, int mid , int right, vector<int>& nums, vector<int>& sorted){
-        int eleP=left;
-        int a=left, b=mid+1;
-        while(eleP<=right && a<=mid && b<=right){
-            if(nums[a]<=nums[b]){
-                sorted[eleP]=nums[a];
-                a++;
-                eleP++;
+    void merge(vector<int>& nums, int left, int mid, int right) {
+        vector<int> temp;
+        temp.reserve(right - left + 1);
+
+        int i = left;
+        int j = mid + 1;
+
+        while (i <= mid && j <= right) {
+            if (nums[i] <= nums[j]) {
+                temp.push_back(nums[i++]);
+            } else {
+                temp.push_back(nums[j++]);
             }
-            else{
-                sorted[eleP]=nums[b];
-                b++; 
-                eleP++;
-            }
         }
-        while(eleP<=right && a<=mid){
-            sorted[eleP]=nums[a];
-            eleP++;
-            a++;
+
+        while (i <= mid) {
+            temp.push_back(nums[i++]);
         }
-        while(eleP<=right && b<=right){
-            sorted[eleP]=nums[b];
-            eleP++;
-            b++; 
+
+        while (j <= right) {
+            temp.push_back(nums[j++]);
         }
-        for(int i=left;i<=right;i++){
-            nums[i]=sorted[i];
+
+        for (int k = left; k <= right; k++) {
+            nums[k] = temp[k - left];
         }
     }
-    void merge(int left, int right, vector<int>& nums, vector<int>& sorted){
-        if(left>=right) return;
-        int mid=left+(right-left)/2;
-        merge(left,mid,nums, sorted);
-        merge(mid+1, right, nums, sorted);
-        mergeSort(left, mid, right, nums, sorted);
+
+    void mergeSort(vector<int>& nums, int left, int right) {
+        if (left >= right) return;
+
+        int mid = left + (right - left) / 2;
+
+        mergeSort(nums, left, mid);
+        mergeSort(nums, mid + 1, right);
+
+        merge(nums, left, mid, right);
     }
+
     vector<int> sortArray(vector<int>& nums) {
-        int n=nums.size();
-        vector<int> sorted(nums.size());
-        merge(0,n-1,nums, sorted);
+        mergeSort(nums, 0, nums.size() - 1);
         return nums;
     }
 };
