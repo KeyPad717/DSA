@@ -1,11 +1,10 @@
 class Solution {
 public:
-    void mergeSort(int left,int mid, int right, vector<int> &nums, int& cnt){
+    void merge(int left,int mid, int right, vector<int> &nums, int& cnt){
         vector<int> temp;
         temp.reserve(right-left+1);
         int a=left, b=mid+1;
         int c=mid+1;
-        int prev=0;
         for(int i=a;i<=mid;i++){
             long long x=1LL * nums[i];
             long long y=1LL;
@@ -30,16 +29,16 @@ public:
             nums[i]=temp[i-left];
         }
     }
-    void merge(int left, int right, vector<int> &nums, int& cnt){
+    void mergeSort(int left, int right, vector<int> &nums, int& cnt){
         if(left>=right) return;
         int mid=left+(right-left)/2;
-        merge(left,mid,nums,cnt);
-        merge(mid+1,right,nums,cnt);
-        mergeSort(left,mid,right,nums,cnt);
+        mergeSort(left,mid,nums,cnt);
+        mergeSort(mid+1,right,nums,cnt);
+        merge(left,mid,right,nums,cnt);
     }
     int reversePairs(vector<int>& nums) {
         int n=nums.size(), cnt=0;
-        merge(0,n-1,nums,cnt);
+        mergeSort(0,n-1,nums,cnt);
         return cnt;
     }
 };
