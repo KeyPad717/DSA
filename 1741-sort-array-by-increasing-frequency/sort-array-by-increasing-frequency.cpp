@@ -16,9 +16,10 @@ public:
             int freq=minHeap.top().first;
             int ele=minHeap.top().second;
             minHeap.pop();
-            res.push_back(-ele);
-            freq--;
-            if(freq!=0) minHeap.push({freq,ele});
+            while(freq!=0) {
+                freq--;
+                res.push_back(-ele);
+            }
         }
         return res;
     }
