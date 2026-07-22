@@ -19,7 +19,8 @@ public:
                 }
                 else{
                     //cout<<a<<" "<<a+1<<" "<<mp[a+1]<<endl;
-                    if(mp[a+1]!=0){
+                    auto it=mp.find(a+1);
+                    if(it!=mp.end()){
                         a++;
                         mp[a]--;
                         if(mp[a]==0)    mp.erase(a);
