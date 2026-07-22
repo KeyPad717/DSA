@@ -24,8 +24,7 @@ public:
             int val1=minHeap.top().first;
             ListNode* temp=minHeap.top().second;
             minHeap.pop();
-            ListNode* newNode=new ListNode(val1);
-            tail->next=newNode;
+            tail->next=temp;
             tail=tail->next;
             if(temp->next){
                 temp=temp->next;
