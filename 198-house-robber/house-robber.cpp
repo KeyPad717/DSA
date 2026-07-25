@@ -1,16 +1,16 @@
 class Solution {
 public:
-    int helper(int idx, int n, const vector<int>& nums, vector<int> &dp){
-        if(idx==0)  return nums[0];
-        if(idx<0)   return 0;
-        if(dp[idx]!=-1) return dp[idx];            
-        int pick=nums[idx]+helper(idx-2,n,nums,dp);
-        int not_pick=helper(idx-1,n,nums,dp);
-        return dp[idx]=max(pick,not_pick);
-    }
     int rob(vector<int>& nums) {
         int n=nums.size();
+        if(n==1)    return nums[0];
         vector<int> dp(n,-1);
-        return helper(n-1,n,nums,dp);
+        dp[0]=nums[0];
+        dp[1]=max(nums[0],nums[1]);
+        for(int i=2;i<n;i++){
+            int pick=nums[i]+dp[i-2];
+            int not_pick=dp[i-1];
+            dp[i]=max(pick,not_pick);
+        }
+        return dp[n-1];
     }
 };
