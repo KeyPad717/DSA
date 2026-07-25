@@ -1,15 +1,17 @@
 class Solution {
 public:
-    void dfs(TreeNode* node, vector<int>& ans){
-        if(!node)   return;
-        ans.push_back(node->val);
-        dfs(node->left,ans);
-        dfs(node->right,ans);
-    }
     vector<int> preorderTraversal(TreeNode* root) {
         if(!root)   return {};
         vector<int> ans;
-        dfs(root,ans);
+        stack<TreeNode*> st;
+        st.push(root);
+        while(!st.empty()){
+            TreeNode* node=st.top();
+            ans.push_back(node->val);
+            st.pop();
+            if(node->right) st.push(node->right);
+            if(node->left) st.push(node->left);
+        }
         return ans;
     }
 };
