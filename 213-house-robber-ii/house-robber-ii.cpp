@@ -10,7 +10,23 @@ public:
     }
     int rob(vector<int>& nums) {
         if(nums.size()==1)  return max(0,nums[0]);
+        int n=nums.size();
         vector<int> dp1(nums.size(),-1),dp2(nums.size(),-1);
-        return max( helper(0,nums.size()-2,nums,dp1) , helper(1,nums.size()-1,nums,dp2));
+        dp1[0]=nums[0];
+        for(int i=1;i<n-1;i++){
+            int pick=0;
+            if(i>1) pick=nums[i]+dp1[i-2];
+            int not_pick=dp1[i-1];
+            dp1[i]=max(pick,not_pick);
+        }
+        dp2[1]=nums[1];
+        for(int i=2;i<n;i++){
+            int pick=0;
+            if(i==2) pick=nums[i];
+            else     pick=nums[i]+dp2[i-2];
+            int not_pick=dp2[i-1];
+            dp2[i]=max(pick,not_pick);
+        }
+        return max(dp1[n-2],dp2[n-1]);
     }
 };
