@@ -1,24 +1,16 @@
 class Solution {
 public:
-    int solver(int n, vector<int>& nums,vector<int> &dp){
-        if(n==0)    return 0;
-        if(n==1)    return nums[n-1];
-        int take=0,nottake=0;
-        if(dp[n]!=-1)   return dp[n];
-        take=nums[n-1]+solver(n-2,nums,dp);
-        nottake=solver(n-1,nums,dp);
-        return(dp[n]=max(take,nottake));
+    int helper(int stopIdx, int idx, const vector<int>& nums, vector<int> &dp){
+        if(idx==stopIdx)    return nums[idx];
+        if(idx<stopIdx)     return 0;
+        if(dp[idx]!=-1)     return dp[idx];
+        int pick=nums[idx]+helper(stopIdx,idx-2,nums,dp);
+        int not_pick=helper(stopIdx,idx-1,nums,dp);
+        return dp[idx]=max(pick,not_pick);
     }
     int rob(vector<int>& nums) {
-        if(nums.size()==1)    return nums[0];
-        int n=nums.size()-1;
-        int x=nums[n];
-        nums.pop_back();
-        vector<int> dp1(n+1,-1),dp2(n+1,-1);
-        int a=solver(n,nums,dp1);
-        nums.push_back(x);
-        nums.erase(nums.begin());
-        int b=solver(n,nums,dp2);
-        return(max(a,b));
+        if(nums.size()==1)  return max(0,nums[0]);
+        vector<int> dp1(nums.size(),-1),dp2(nums.size(),-1);
+        return max( helper(0,nums.size()-2,nums,dp1) , helper(1,nums.size()-1,nums,dp2));
     }
 };
