@@ -11,15 +11,17 @@
  */
 class Solution {
 public:
-    int balHelper(TreeNode* root){
-        if(!root)   return 0;
-        int lh=balHelper(root->left);
-        int rh=balHelper(root->right);
-        if(lh==-1 || rh==-1)    return -1;
+    int helper(TreeNode* node){
+        if(!node)   return 0;
+        int lh=helper(node->left);
+        int rh=helper(node->right);
+        if(lh==-1||rh==-1)  return -1;
         if(abs(lh-rh)>1)    return -1;
-        return max(lh,rh)+1;
+        return 1+max(lh,rh);
     }
     bool isBalanced(TreeNode* root) {
-        return balHelper(root) != -1;
+        int h=helper(root);
+        if(h==-1)   return false;
+        return true;
     }
 };
