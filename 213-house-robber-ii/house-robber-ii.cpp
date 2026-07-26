@@ -9,18 +9,21 @@ public:
     //     return dp[idx]=max(pick,not_pick);
     // }
     int tabHelper(int start, int end, vector<int>& nums){
-        vector<int> dp(nums.size());
-        dp[start]=nums[start];
-        for(int i=start+1;i<=end;i++){
+        //vector<int> dp(nums.size());
+        int prev=nums[start];
+        int curr=max(prev,nums[start+1]);
+        for(int i=start+2;i<=end;i++){
             int pick=nums[i];
-            if(i-2>=start)   pick+=dp[i-2];
-            int not_pick=dp[i-1];
-            dp[i]=max(pick,not_pick);
+            pick+=prev;
+            int not_pick=curr;
+            prev=curr;
+            curr=max(pick,not_pick);
         }
-        return dp[end];
+        return curr;
     }
     int rob(vector<int>& nums) {
-        if(nums.size()==1)  return max(0,nums[0]);
+        if(nums.size()==1)  return nums[0];
+        if(nums.size()==2)  return max(nums[0],nums[1]);
         int n=nums.size();
         return max(tabHelper(0,n-2,nums),tabHelper(1,n-1,nums));
     }
