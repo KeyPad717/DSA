@@ -11,11 +11,11 @@
  */
 class Solution {
 public:
-    int maxHelper(TreeNode* root){
-        if(!root)   return 0;
-        return 1+max(maxHelper(root->left), maxHelper(root->right));
+    int helper(TreeNode* node){
+        if(!node)   return 0;
+        return 1+max(helper(node->left),helper(node->right));
     }
     int maxDepth(TreeNode* root) {
-        return maxHelper(root);
+        return helper(root);
     }
 };
