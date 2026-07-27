@@ -15,8 +15,8 @@ public:
         if(!node)   return 0;
         int lh=helper(node->left);
         int rh=helper(node->right);
-        if(lh==-1||rh==-1)  return -1;
-        if(abs(lh-rh)>1)    return -1;
+        if(lh==-1 || rh==-1)    return -1;
+        if(abs(lh-rh)>1)        return -1;
         return 1+max(lh,rh);
     }
     bool isBalanced(TreeNode* root) {
