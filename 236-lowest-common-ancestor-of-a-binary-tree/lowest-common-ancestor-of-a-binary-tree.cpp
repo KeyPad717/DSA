@@ -14,10 +14,7 @@ public:
         if(node==p || node==q) return node;
         TreeNode* left=dfs(node->left,p,q);
         TreeNode* right=dfs(node->right,p,q);
-        if(left==p && right==q || left==q && right==p)  return node;
-        if(left==p || left==q) return left;
-        if(right==p || right==q) return right;
-        if(!left && !right) return nullptr;
+        if(left && right)   return node;
         if(!left)           return right;
         if(!right)          return left;
         return nullptr;
