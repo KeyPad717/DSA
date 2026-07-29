@@ -31,9 +31,9 @@ public:
                 q.push({node->right,{x+1,y+1}});
             }
         }
-        for(auto a:mp){
+        for(auto &a:mp){
             vector<int> temp;
-            for(auto b:a.second){
+            for(auto &b:a.second){
                 for(auto c:b.second){
                     temp.push_back(c);
                 }
