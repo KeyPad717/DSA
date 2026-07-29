@@ -7,6 +7,9 @@ public:
         int up=0, left=0;
         if(x>=0)    up=helper(x-1,y,grid,dp);
         if(y>=0)    left=helper(x,y-1,grid,dp);
+        if(up==INT_MAX && left==INT_MAX)    dp[x][y]=grid[x][y];
+        else if(up==INT_MAX)                dp[x][y]=grid[x][y]+left;
+        else if(left==INT_MAX)              dp[x][y]=grid[x][y]+up;
         return dp[x][y]=grid[x][y]+min(up,left);    
     }
     int minPathSum(vector<vector<int>>& grid) {
