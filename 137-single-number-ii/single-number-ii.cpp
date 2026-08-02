@@ -8,8 +8,7 @@ public:
             for(int j=0;j<n;j++){
                 if((nums[j])&(1<<i))    cnt++;
             }
-            if(cnt%3)  ele+=(1<<i)*1;
-            else        ele+=(1<<i)*0;
+            if(cnt%3)  ele+=(1<<i);
         }
         return ele;
     }
