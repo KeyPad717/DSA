@@ -32,7 +32,7 @@ public:
             curr=new1;
         }
         fast=head;
-        if(fast->val!=prev->val)    return false;
+        //if(fast->val!=prev->val)    return false;
         while(prev && fast!=slow){
             if(prev->val!=fast->val)    return false;
             prev=prev->next;
