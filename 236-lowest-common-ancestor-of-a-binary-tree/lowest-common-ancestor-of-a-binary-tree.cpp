@@ -14,10 +14,10 @@ public:
         if(node==p || node==q)  return node;
         TreeNode* left=helper(node->left, p, q);
         TreeNode* right=helper(node->right, p, q);
-        if(left && right)    return node;
-        else if (right) return right;
-        else if(left)   return left;
-        return nullptr;
+        if(!left && !right) return nullptr;
+        else if(!left)      return right;
+        else if(!right)     return left;
+        return node;
     }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         return helper(root, p, q);
