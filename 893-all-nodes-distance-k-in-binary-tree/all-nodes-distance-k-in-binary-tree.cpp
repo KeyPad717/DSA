@@ -10,9 +10,10 @@
 class Solution {
 public:
     vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+        int d=0;
+        unordered_map<TreeNode*, TreeNode*> parentMap;
+        unordered_map<TreeNode*, int> visited;
         vector<int> ans;
-        unordered_map<TreeNode*,TreeNode*> parentMap;
-        unordered_map<TreeNode*, int> vis;
         queue<TreeNode*> q;
         q.push(root);
         TreeNode* node;
@@ -31,30 +32,29 @@ public:
                 }
             }
         }
-        int d=0;
         q.push(target);
-        vis[target]=1;
+        visited[target]=1;
         while(d!=k){
-            d++;
             int sz=q.size();
+            d++;
             for(int i=0;i<sz;i++){
                 node=q.front();
                 q.pop();
                 if(parentMap.find(node)!=parentMap.end()){
-                    if(vis.find(parentMap[node])==vis.end()){
-                        vis[parentMap[node]]=1;
+                    if(visited.find(parentMap[node])==visited.end()){
+                        visited[parentMap[node]]=1;
                         q.push(parentMap[node]);
                     }
                 }
                 if(node->left){
-                    if(vis.find(node->left)==vis.end()){
-                        vis[node->left]=1;
+                    if(visited.find(node->left)==visited.end()){
+                        visited[node->left]=1;
                         q.push(node->left);
                     }
                 }
                 if(node->right){
-                    if(vis.find(node->right)==vis.end()){
-                        vis[node->right]=1;
+                    if(visited.find(node->right)==visited.end()){
+                        visited[node->right]=1;
                         q.push(node->right);
                     }
                 }
