@@ -9,7 +9,10 @@ public:
                     j++;
                 }
                 if(ans=="") ans=str;
-                else    ans=str+' '+ans;
+                else {
+                    str.push_back(' ');
+                    ans.insert(0,str);
+                }
                 str="";
             }
             else{
@@ -17,7 +20,10 @@ public:
                 j++;
             }
         }
-        if(str!="") ans=str+' '+ans;
+        if(str!=""){
+            str.push_back(' ');
+            ans.insert(0,str);
+        }
         if(ans!="" && ans[ans.size()-1]==' ')  ans.pop_back();
         return ans;
     }
