@@ -1,6 +1,7 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
+        if(s.size() != t.size()) return false;
         vector<int> v1(26),v2(26);
         for(char x:s){
             v1[x-'a']++;
