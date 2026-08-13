@@ -5,14 +5,14 @@ public:
         return false;
 
     unordered_map<char, char> mp1;
-    unordered_map<char, int> mp2;
+    unordered_set<char> used;
 
     for (int i = 0; i < s.size(); i++) {
         if (mp1.find(s[i]) == mp1.end()) {
-            if (mp2.find(t[i]) != mp2.end())
+            if (used.find(t[i]) != used.end())
                 return false;
             mp1[s[i]] = t[i];
-            mp2[t[i]]++;
+            used.insert(t[i]);
         }
         else{
             if(t[i]!=mp1[s[i]]) return false;
