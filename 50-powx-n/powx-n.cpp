@@ -1,26 +1,20 @@
 class Solution {
 public:
     double myPow(double x, int n) {
-        long long power = n;
-
-        // Handle negative exponent
-        if (power < 0) {
-            x = 1 / x;
-            power = -power;
-        }
-
-        double result = 1.0;
-
-        while (power > 0) {
-            // If power is odd
-            if (power % 2 == 1) {
-                result *= x;
+        long long n1=n;
+        double ans=1.0;
+        if(n1<0)    n1=(-1)*n1;
+        while(n1>0){
+            if(n1%2){
+                ans*=x;
+                n1--;
             }
-
-            x *= x;
-            power /= 2;
+            else{
+                x*=x;
+                n1/=2;
+            }
         }
-
-        return result;
+        if(n<0) return 1/ans;
+        return ans;
     }
 };
