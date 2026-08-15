@@ -31,6 +31,6 @@ public:
             }
             next=curr;
         }
-        return next[n];
+        return curr[n];
     }
 };
