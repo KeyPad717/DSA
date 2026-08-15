@@ -7,22 +7,22 @@ public:
         }
         if(sum&1)   return false;
         int n=nums.size(), targetSum=(sum/2);
-        vector<vector<bool>> dp(n, vector<bool> (targetSum+1));
+        vector<bool> prev(targetSum+1), curr(targetSum+1);
+        //vector<vector<bool>> dp(n, vector<bool> (targetSum+1));
         for(int s=0;s<=targetSum;s++){
-            if(nums[0]==s)   dp[0][s]=true;
-        }
-        for(int idx=0;idx<n;idx++){
-            dp[idx][0]=true;
+            if(nums[0]==s)   prev[s]=true;
         }
         for(int idx=1;idx<n;idx++){
             for(int s=1;s<=targetSum;s++){
+                curr[0]=true;
                 bool pick=false;
                 if(nums[idx]<=s){
-                    pick=dp[idx-1][s-nums[idx]];
+                    pick=prev[s-nums[idx]];
                 }
-                dp[idx][s]=(pick || dp[idx-1][s]);
+                curr[s]=(pick || prev[s]);
             }
+            prev=curr;
         }
-        return dp[n-1][targetSum];
+        return prev[targetSum];
     }
 };
