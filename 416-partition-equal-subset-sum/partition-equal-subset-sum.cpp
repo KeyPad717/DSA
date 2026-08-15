@@ -4,7 +4,7 @@ public:
         if(sum==0)  return true;
         if(idx<0 || sum<0)  return false;
         if(dp[idx][sum]!=-1)  return dp[idx][sum]==1;
-        int pick=false;
+        bool pick=false;
         if(nums[idx]<=sum){
             pick=helper(idx-1, nums, dp, sum-nums[idx]);
         }
@@ -17,8 +17,26 @@ public:
             sum+=x;
         }
         if(sum&1)   return false;
-        int n=nums.size();
-        vector<vector<int>> dp(n, vector<int> ((sum/2)+1,-1));
-        return helper(n-1, nums, dp, sum/2);
+        int n=nums.size(), targetSum=(sum/2);
+        vector<vector<bool>> dp(n, vector<bool> (targetSum+1));
+        for(int s=0;s<=targetSum;s++){
+            if(nums[0]==s)   dp[0][s]=true;
+            else            dp[0][s]=false;
+        }
+        for(int idx=0;idx<n;idx++){
+            dp[idx][0]=true;
+        }
+        for(int idx=1;idx<n;idx++){
+            for(int s=1;s<=targetSum;s++){
+                bool pick=false;
+                if(nums[idx]<=s){
+                    pick=dp[idx-1][s-nums[idx]];
+                    //helper(idx-1, nums, dp, sum-nums[idx]);
+                }
+                dp[idx][s]=(pick || dp[idx-1][s]);
+                //helper(idx-1, nums, dp, sum));
+            }
+        }
+        return dp[n-1][targetSum];
     }
 };
