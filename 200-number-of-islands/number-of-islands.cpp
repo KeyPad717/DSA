@@ -1,27 +1,29 @@
 class Solution {
 public:
-    const int dr[4]={-1,1,0,0};
-    const int dc[4]={0,0,-1,1};
-    void dfs(int m, int n, int x, int y, vector<vector<char>>& grid){
+    int dc[4]={0,0,1,-1};
+    int dr[4]={-1,1,0,0};
+    void dfs(int x, int y, vector<vector<char>>& grid){
+        int n=grid.size();
+        int m=grid[0].size();
         grid[x][y]='0';
         for(int i=0;i<4;i++){
             int c1=x+dr[i];
             int c2=y+dc[i];
-            if(c1>=0 && c1<m && c2>=0 && c2<n && grid[c1][c2]=='1'){
-                dfs(m,n,c1,c2,grid);
+            if(c1>=0 && c2>=0 && c1<n && c2<m && grid[c1][c2]=='1'){
+                dfs(c1,c2,grid);
             }
         }
     }
     int numIslands(vector<vector<char>>& grid) {
-        int m=grid.size(), n=grid[0].size(), count=0;
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
+        int n=grid.size(), m=grid[0].size(), islands=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
                 if(grid[i][j]=='1'){
-                    dfs(m,n,i,j,grid);
-                    count++;
+                    islands++;
+                    dfs(i,j,grid);
                 }
             }
         }
-        return count;
+        return islands;
     }
 };
