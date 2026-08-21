@@ -1,37 +1,34 @@
 class Solution {
 public:
-    const int dr[4]={0,0,-1,1};
-    const int dc[4]={-1,1,0,0};
+    int dr[4]={0,0,-1,1};
+    int dc[4]={1,-1,0,0};
     int orangesRotting(vector<vector<int>>& grid) {
-        int m=grid.size(), n=grid[0].size();
-        int maxtime=0, count=0;
-        queue<pair<pair<int,int>, int>> q;
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(grid[i][j]==2){
-                    q.push({{i,j},0});
-                }
-                if(grid[i][j]==1)   count++;
+        int n=grid.size(), m=grid[0].size(), cnt=0, time=0;
+        queue<pair<pair<int,int>,int>> q;//{{x,y},time}
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==2)   q.push({{i,j},0});
+                if(grid[i][j]==1)   cnt++;
             }
         }
-        if(count==0)    return 0;
+        if(cnt==0)  return 0;
         while(!q.empty()){
-            int c1=q.front().first.first;
-            int c2=q.front().first.second;
-            int time=q.front().second;
+            int x=q.front().first.first;
+            int y=q.front().first.second;
+            int t=q.front().second;
             q.pop();
             for(int i=0;i<4;i++){
-                int x=c1+dr[i];
-                int y=c2+dc[i];
-                if(x>=0 && x<m && y>=0 && y<n && grid[x][y]==1){
-                    grid[x][y]=2;
-                    count--;
-                    q.push({{x,y},time+1});
+                int c1=x+dr[i];
+                int c2=y+dc[i];
+                if(c1>=0 && c2>=0 && c1<n && c2<m && grid[c1][c2]==1){
+                    grid[c1][c2]=2;
+                    q.push({{c1,c2},t+1});
+                    cnt--;
                 }
             }
-            maxtime=max(maxtime,time);
+            time=max(time,t);
         }
-        if(count>0) return -1;
-        return maxtime;
+        if(cnt!=0)  return -1;
+        return time;
     }
 };
