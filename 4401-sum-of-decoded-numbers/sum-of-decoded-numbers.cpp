@@ -2,15 +2,16 @@ class Solution {
 public:
     const int mod=1000000007;
     long long pow(long long x1, long long y1){
-        if(y1==1)   return x1;
-        if(y1%2==0){
-            x1=x1%mod;
-            long long pow1=x1*x1;
-            return pow(pow1%mod,y1/2);
+        long long result = 1;
+        x1 %= mod;
+        while (y1 > 0) {
+            if (y1 & 1) {
+                result = (result * x1) % mod;
+            }
+            x1 = (x1 * x1) % mod;
+            y1 /= 2;
         }
-        else{
-            return (x1%mod)*(pow(x1%mod,y1-1)%mod);
-        }
+        return result;
     }
     int sumDecoded(vector<long long>& nums) {
         long long sum=0;
