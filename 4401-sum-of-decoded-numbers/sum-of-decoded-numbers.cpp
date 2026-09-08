@@ -24,7 +24,6 @@ public:
             long long x1=stoll(firstHalf);
             long long y1=stoll(secondHalf);
             long long pow1=pow(x1,y1);
-            cout<<pow1<<endl;
             pow1=pow1%mod;
             sum+=(pow1%=mod);
             sum=sum%mod;
