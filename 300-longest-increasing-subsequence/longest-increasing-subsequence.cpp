@@ -12,16 +12,16 @@ public:
     //     return max(take, not_take);
     // }
     int lengthOfLIS(vector<int>& nums){
-        int n=nums.size(), maxi=1;
-        vector<int> dp(n,1);
-        for(int i=1;i<n;i++){
-            for(int j=0;j<i;j++){
-                if(nums[i]>nums[j]){
-                    dp[i]=max(dp[i],dp[j]+1);
-                    maxi=max(dp[i],maxi);
-                } 
+        int n=nums.size();
+        vector<int> res;
+        res.push_back(nums[0]);
+        for(int i=1;i<nums.size();i++){
+            if(nums[i]>res.back())  res.push_back(nums[i]);
+            else{
+                int idx=lower_bound(res.begin(), res.end(), nums[i])-res.begin();
+                res[idx]=nums[i];
             }
         }
-        return maxi;
+        return res.size();
     }
 };
