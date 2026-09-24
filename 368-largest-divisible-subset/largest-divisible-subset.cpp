@@ -1,52 +1,33 @@
 class Solution {
 public:
-    vector<int> largestDivisibleSubset(vector<int>& arr) {
-        int n=arr.size(),lastidx=0;
-        vector<int> dp(n+1,1),hash(n),temp;
+    vector<int> largestDivisibleSubset(vector<int>& nums) {
+        //if(nums.size()==1)  return nums;
         int maxi=1;
-        sort(arr.begin(),arr.end());
-        for(int idx=0;idx<n;idx++){
-            hash[idx]=idx;
-            for(int prev_idx=0;prev_idx<idx;prev_idx++){
-                if(arr[idx]%arr[prev_idx]==0 && (1+dp[prev_idx])>dp[idx]){
-                    dp[idx]=1+dp[prev_idx];
-                    hash[idx]=prev_idx;
-                }    
+        sort(nums.begin(), nums.end());
+        int n=nums.size(), last_idx=0;
+        vector<int> res;
+        vector<int> idx(n), dp(n,1);
+        for(int i=0;i<n;i++){
+            idx[i]=i;
+        }
+        for(int i=1;i<n;i++){
+            for(int j=0;j<i;j++){
+                if((nums[i]%nums[j])==0 && dp[i]<dp[j]+1){
+                    dp[i]=dp[j]+1;
+                    idx[i]=j;
+                }
             }
-            if(dp[idx]>maxi){
-                maxi=dp[idx];
-                lastidx=idx;
+            if(dp[i]>maxi){
+                maxi=dp[i];
+                last_idx=i;
             }
         }
-        temp.push_back(arr[lastidx]);
-        while(hash[lastidx]!=lastidx){
-            lastidx=hash[lastidx];
-            temp.push_back(arr[lastidx]);
+        res.push_back(nums[last_idx]);
+        while(idx[last_idx]!=last_idx){
+            last_idx=idx[last_idx];
+            res.push_back(nums[last_idx]);
         }
-        reverse(temp.begin(),temp.end());
-        return temp;
+        reverse(res.begin(), res.end());
+        return res;
     }
 };
-// int n=arr.size(),lastidx=0;
-//         vector<int> dp(n+1,1),hash(n),temp;
-//         int maxi=1;
-//         for(int idx=0;idx<n;idx++){
-//             hash[idx]=idx;
-//             for(int prev_idx=0;prev_idx<idx;prev_idx++){
-//                 if(arr[prev_idx]<arr[idx] && (1+dp[prev_idx])>dp[idx]){
-//                     dp[idx]=1+dp[prev_idx];
-//                     hash[idx]=prev_idx;
-//                 }    
-//             }
-//             if(dp[idx]>maxi){
-//                 maxi=dp[idx];
-//                 lastidx=idx;
-//             }
-//         }
-//         temp.push_back(arr[lastidx]);
-//         while(hash[lastidx]!=lastidx){
-//             lastidx=hash[lastidx];
-//             temp.push_back(arr[lastidx]);
-//         }
-//         reverse(temp.begin(),temp.end());
-//         return temp;
