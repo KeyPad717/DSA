@@ -1,18 +1,16 @@
 class Solution {
 public:
-    int helper(int idx, int prev_idx, vector<int>& nums, vector<vector<int>>& dp){
-        if(idx==nums.size())  return 0;
-        if(prev_idx != -1 && dp[prev_idx][idx]!=-1) return dp[prev_idx][idx];
-        int take=0;
-        if(prev_idx==-1 || nums[idx]>nums[prev_idx]){
-            take=1+helper(idx+1, idx, nums, dp);
-        }
-        int not_take=helper(idx+1, prev_idx, nums, dp);
-        if(prev_idx != -1) return dp[prev_idx][idx]=max(take, not_take);
-        return max(take, not_take);
-    }
     int lengthOfLIS(vector<int>& nums) {
-        vector<vector<int>> dp(nums.size(), vector<int> (nums.size(), -1));//{prev_idx, idx}
-        return helper(0, -1, nums, dp);
+        int n=nums.size(), maxi=1;
+        vector<int> dp(n,1);
+        for(int i=1;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(nums[j]<nums[i]){
+                    dp[i]=max(dp[i], dp[j]+1);
+                    maxi=max(dp[i], maxi);
+                }
+            }
+        }
+        return maxi;
     }
 };
