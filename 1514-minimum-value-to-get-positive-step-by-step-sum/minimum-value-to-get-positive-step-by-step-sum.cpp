@@ -1,18 +1,13 @@
 class Solution {
 public:
     int minStartValue(vector<int>& nums) {
-        for(int i=1;i<=10000;i++){
-            int sum=i, f=0;
-            for(int x:nums){
-                sum+=x;
-                if(sum<1){
-                    f=1;
-                    break;
-                }
-            }
-            if(f==1)    continue;
-            else        return i;
+        int sum=0, mini=INT_MAX;
+        for(int x:nums){
+            sum+=x;
+            mini=min(mini,sum);
+            cout<<sum<<" "<<mini<<" "<<x<<endl;
         }
-        return -1;
+        if(mini>=1) return 1;
+        return abs(mini)+1;
     }
 };
