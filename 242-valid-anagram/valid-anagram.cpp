@@ -1,13 +1,13 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        unordered_map<char,int> mp1,mp2;
+        vector<int> arr1(26), arr2(26);
         for(char x:s){
-            mp1[x]++;
+            arr1[x-'a']++;
         }
         for(char x:t){
-            mp2[x]++;
+            arr2[x-'a']++;
         }
-        return mp1==mp2;
+        return arr1==arr2;
     }
 };
