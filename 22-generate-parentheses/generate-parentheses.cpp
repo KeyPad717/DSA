@@ -6,23 +6,20 @@ public:
             res.push_back(temp);
             return ;
         }
-        if(cnt1>cnt2){
-            temp.push_back(')');
-            helper(cnt1, cnt2+1, n, temp, res);
-            temp.pop_back();
+        if(cnt1<n){
             temp.push_back('(');
             helper(cnt1+1, cnt2, n, temp, res);
             temp.pop_back();
         }
-        if(cnt1<=cnt2){
-            temp.push_back('(');
-            helper(cnt1+1, cnt2, n, temp, res);
+        if(cnt2<cnt1){
+            temp.push_back(')');
+            helper(cnt1, cnt2+1, n, temp, res);
             temp.pop_back();
         }
     }
     vector<string> generateParenthesis(int n) {
         vector<string> res;
-        helper(1, 0, n, "(", res);
+        helper(0, 0, n, "", res);
         return res;
     }
 };
