@@ -13,7 +13,9 @@ class Solution {
 public:
     int helper(TreeNode* node){
         if(!node)   return 0;
-        return 1+max(helper(node->left),helper(node->right));
+        int lh=helper(node->left);
+        int rh=helper(node->right);
+        return 1+max(lh,rh);
     }
     int maxDepth(TreeNode* root) {
         return helper(root);
