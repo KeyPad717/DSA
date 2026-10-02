@@ -1,7 +1,6 @@
 class Solution {
 public:
-    void helper(int cnt1, int cnt2, int n, string temp, vector<string>& res){
-        if(cnt1>n || cnt2>n)    return ;
+    void helper(int cnt1, int cnt2, int n, string& temp, vector<string>& res){
         if(cnt1==n && cnt2==n){
             res.push_back(temp);
             return ;
@@ -19,7 +18,8 @@ public:
     }
     vector<string> generateParenthesis(int n) {
         vector<string> res;
-        helper(0, 0, n, "", res);
+        string temp="";
+        helper(0, 0, n, temp, res);
         return res;
     }
 };
