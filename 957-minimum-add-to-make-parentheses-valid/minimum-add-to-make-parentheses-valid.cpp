@@ -1,19 +1,22 @@
 class Solution {
 public:
     int minAddToMakeValid(string s) {
-        int open=0, close=0, i=0;
-        int count=0, sum=0;
-
+        int open=0, close=0;
+        int i=0, cnt=0, res=0;
         while(i<s.size()){
             if(s[i]=='('){
-                open++;
+               cnt++;
             }
             else{
-                if(open==0)            close++;
-                else if(open>0)   open--;
+                if(cnt>0){
+                    cnt--;
+                }
+                else{
+                    res++;
+                }
             }
             i++;
         }
-        return open+close;
+        return res+cnt;
     }
 };
