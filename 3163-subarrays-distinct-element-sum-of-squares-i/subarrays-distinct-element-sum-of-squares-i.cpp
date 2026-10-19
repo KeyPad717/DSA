@@ -1,18 +1,19 @@
 class Solution {
 public:
     int sumCounts(vector<int>& nums) {
-        static bitset<101> seen;
-        int n=nums.size(), ans=0;
-        for(int l=0; l<n; l++){
-            seen.reset();
-            int cnt=0;
-            for(int r=l; r<n; r++){
-                int x=nums[r];
-                cnt+=(seen[x]==0); 
-                seen[x]=1;
-                ans+=cnt*cnt;
-            } 
+        int sum=0;
+        for(int i=0;i<nums.size();i++){
+            unordered_map<int,int> mp;
+            int sum1=0;
+            for(int j=i;j<nums.size();j++){
+                if(mp.find(nums[j])==mp.end()){
+                    mp[nums[j]]=1;
+                }
+                else    mp[nums[j]]++;
+                sum1+=mp.size()*mp.size();
+            }
+            sum+=sum1;
         }
-        return ans;
+        return sum;
     }
 };
