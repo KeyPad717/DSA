@@ -15,7 +15,7 @@ public:
         }
         int swaps=0;
         vector<int> nums1{nums.begin(), nums.end()};
-        auto lambda=[this](int num1, int num2){
+        auto lambda=[&](int num1, int num2){
             int digitSum1=getDigitSum(num1);
             int digitSum2=getDigitSum(num2);
             if(digitSum1!=digitSum2){
