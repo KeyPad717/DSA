@@ -3,14 +3,14 @@ public:
     int sumCounts(vector<int>& nums) {
         int sum=0;
         for(int i=0;i<nums.size();i++){
-            unordered_map<int,int> mp;
-            int sum1=0;
+            vector<int> seen(101,0);
+            int sum1=0, cnt=0;
             for(int j=i;j<nums.size();j++){
-                if(mp.find(nums[j])==mp.end()){
-                    mp[nums[j]]=1;
+                if(seen[nums[j]]==0){
+                    seen[nums[j]]++;
+                    cnt++;
                 }
-                else    mp[nums[j]]++;
-                sum1+=mp.size()*mp.size();
+                sum1+=cnt*cnt;
             }
             sum+=sum1;
         }
