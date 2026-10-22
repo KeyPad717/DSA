@@ -7,7 +7,7 @@ public:
             return 0;
         }
 
-        const int n = static_cast<int>(s.size());
+        int n=s.size();
     
         if (n == 2) {
             return -1;
